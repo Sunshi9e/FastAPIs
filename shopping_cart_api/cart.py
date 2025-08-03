@@ -1,5 +1,4 @@
-import json
-import os
+import json, os,  math 
 
 def load_cart():
     try:
@@ -19,3 +18,9 @@ def save_cart(cart):
     except Exception as e:
         print("Error saving cart:", e)
 
+
+def calculate_total(cart_items):
+    total = 0
+    for item in cart_items:
+        total += item["price"] * item["qty"]
+    return math.floor(total * 100) / 100 

@@ -60,3 +60,21 @@ def add_to_cart(product_id: int, qty: int):
 
     except Exception as e:
         return {"error": str(e)}
+
+
+@app.get("/cart/checkout")
+def checkout():
+    try:
+        current_cart = cart.load_cart()
+        if not current_cart:
+            return {"message": "Cart is empty"}
+
+        total = cart.calculate_total(current_cart)
+
+        return {
+            "cart": current_cart,
+            "total": total
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
