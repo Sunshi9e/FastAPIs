@@ -43,3 +43,18 @@ def update_contact(
     return {"message": "Contact updated successfully."}
 
 
+@app.post("/contacts/{name}")
+def update_contact(
+    name: str = Path(..., description="The name of the contact to update"),
+    phone: str = Body(None, embed=True),
+    email: str = Body(None, embed=True)
+):
+    if name not in contacts:
+        return {"error": "Contact not found."}
+
+    if phone:
+        contacts[name]["phone"] = phone
+    if email:
+        contacts[name]["email"] = email
+
+    return {"message": f"Contact '{name}' updated.", "contact": contacts[name]}
