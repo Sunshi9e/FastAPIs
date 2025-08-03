@@ -32,6 +32,13 @@ def save_student(student_data):
 @app.post("/students/")
 def create_student(student: Student):
     try:
+        students = load_students()
+
+        # Check for duplicate name
+        for existing_student in students:
+            if existing_student["name"].lower() == student.name.lower():
+                return {"error": f"Student with name '{student.name}' already exists"}
+
         scores = student.subject_scores
         average = sum(scores.values()) / len(scores)
 
