@@ -18,3 +18,4 @@ def save_cart(cart):
             json.dump(cart, f, indent=2)
     except Exception as e:
         print("Error saving cart:", e)
+
