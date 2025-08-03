@@ -13,7 +13,7 @@ class Student(BaseModel):
 
 def save_student(student_data):
     try:
-        # Load existing students if file exists
+        
         if os.path.exists("students.json"):
             with open("students.json", "r") as file:
                 students = json.load(file)
